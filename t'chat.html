@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Open Messenger</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+	<link rel="stylesheet" href="../style/t'chat.css">
+
+
+</head>
+
+<body>
+
+	<div class="container">
+		<div class="sidebar">
+
+			<h2><img src="assets/Open-Messenger-Logo.png" alt="Open-Messenger-Icon"></h2>
+
+			<hr>
+
+			<div id="userss">
+				<img src="assets/Open-Messenger-User-Avatar.png" alt="username">
+				<p id="user-name" style="padding-left: 1rem;font-size: 22px;"></p>
+				<a id="logout" href="#"><img src="assets/btn-logout.png" alt="btn logout"
+						style="width: 2.5rem;margin-left:450%;"></a>
+			</div>
+			<!-- --------- nombre de user conecté ------  -->
+			<p style="margin: 23px;" id="compteur"> </p>
+
+			<!-- ------------barre de recherhce contact ------  -->
+			<div class="search-container">
+				<input type="text" placeholder="Search people" id="searchInput">
+				<i class="fas fa-search"></i>
+			</div>
+
+
+			<!-- ----------- list des conatct dans le chat -----  -->
+			<div style="box-sizing: border-box;overflow-y: scroll;overflow-x: hidden;height: 500px;">
+				<nav id="user_list">
+					<ul id="user_log"></ul>
+
+				</nav>
+			</div>
+
+
+		</div>
+
+		<!-- ----------- window du chat -----  -->
+		<div class="chat">
+
+			<div class="chat-header">
+				<h3>Open Chat</h3>
+			</div>
+			<div class="chat-messages">
+
+				<main id="t_chat">
+
+					<div id="message"></div>
+
+				</main>
+
+
+			</div>
+			<form class="chat-input" id="shoutbox">
+				<input type="text" id="send" placeholder="Enter your message here" autocomplete="off">
+
+				<button type="submit" style="background-color: #fff;" id="send_mess"><img src="assets/btn-send.png"
+						alt="btn-send" style="width: 3rem;"></button>
+			</form>
+
+
+		</div>
+	</div>
+
+
+
+
+
+	<script>
+		// Sélectionne l'élément de la barre de recherche et la liste des utilisateurs
+		const searchInput = document.getElementById('searchInput');
+		const userLog = document.getElementById('user_log');
+
+		// Ajoute un écouteur d'événement pour l'entrée de texte dans la barre de recherche
+		searchInput.addEventListener('input', function () {
+			const filter = searchInput.value.toLowerCase();
+			const contacts = userLog.getElementsByTagName('li');
+
+			// Parcourt chaque contact dans la liste
+			Array.from(contacts).forEach(function (contact) {
+				const contactName = contact.textContent.toLowerCase();
+
+				// Affiche ou masque le contact en fonction de la correspondance avec le filtre
+				if (contactName.includes(filter)) {
+					contact.style.display = '';
+				} else {
+					contact.style.display = 'none';
+				}
+			});
+		});
+	</script>
+	<script type="text/javascript" src="../jquery.min.js"></script>
+	<script src="../app.js"></script>
+	<script>app.initalizeChat();</script>
+	<script>app.initializeLogout();</script>
+	<script>app.initializeTalk();</script>
+
+</body>
+
+</html>
